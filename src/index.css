@@ -2,87 +2,96 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
+/* Gov Schemes Portal Design System - All colors, gradients, fonts, etc defined here. 
+All colors MUST be HSL. Based on modern contrasting palette (Blue/Gray/White)
 */
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
-
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
-
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
-
+    /* Core Brand Colors */
+    --background: 39 14% 88%; /* Neutral gray background - #c0c3c95f equivalent */
+    --foreground: 0 0% 8%; /* Dark text */
+    --surface: 0 0% 100%; /* Pure white surface */
+    
+    /* Primary Brand (Deep Black/Blue) */
+    --primary: 0 0% 8%; /* Deep black #141414 */
+    --primary-foreground: 0 0% 100%;
+    --primary-hover: 0 0% 0%; /* Pure black hover */
+    
+    /* Secondary & Surface Colors */
     --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-
+    --secondary-foreground: 0 0% 8%;
     --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
-
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 214.3 31.8% 91.4%;
+    --muted-foreground: 220 9% 46%; /* Medium gray #6b7280 */
+    
+    /* Interactive Elements */
+    --accent: 39 57% 94%; /* Light beige #F5F3EF for hovers */
+    --accent-foreground: 0 0% 8%;
+    
+    /* UI Elements */
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 8%;
+    --border: 220 13% 27%; /* Light gray border #3a3b3c */
     --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
-
-    --radius: 0.5rem;
-
-    --sidebar-background: 0 0% 98%;
-
+    --ring: 0 0% 8%;
+    
+    /* Sidebar System */
+    --sidebar-background: 0 0% 100%;
     --sidebar-foreground: 240 5.3% 26.1%;
-
-    --sidebar-primary: 240 5.9% 10%;
-
+    --sidebar-primary: 0 0% 8%;
     --sidebar-primary-foreground: 0 0% 98%;
-
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --sidebar-accent: 39 57% 94%;
+    --sidebar-accent-foreground: 0 0% 8%;
+    --sidebar-border: 220 13% 27%;
+    
+    /* Shadows */
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.08);
+    --shadow-lg: 0 12px 24px rgba(0, 0, 0, 0.12);
+    
+  /* Layout Variables */
+  --sidebar-width: 180px;
+  --sidebar-width-collapsed: 80px;
+  --header-height: 70px;
+  --sidebar-offset: 8px;
+  --topbar-height: 60px;
+  
+  --radius: 0.875rem; /* 14px - main border radius */
+  --radius-lg: 1.375rem; /* 22px - large border radius */
+  
+  /* Animations */
+  --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-fast: all 0.2s ease;
+  
+  /* Responsive breakpoints in CSS custom properties */
+  --mobile-breakpoint: 640px;
+  --tablet-breakpoint: 768px; 
+  --desktop-breakpoint: 1024px;
   }
 
   .dark {
     --background: 222.2 84% 4.9%;
     --foreground: 210 40% 98%;
-
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-
+    --surface: 222.2 84% 4.9%;
+    
     --primary: 210 40% 98%;
     --primary-foreground: 222.2 47.4% 11.2%;
-
+    --primary-hover: 210 40% 90%;
+    
     --secondary: 217.2 32.6% 17.5%;
     --secondary-foreground: 210 40% 98%;
-
     --muted: 217.2 32.6% 17.5%;
     --muted-foreground: 215 20.2% 65.1%;
-
+    
     --accent: 217.2 32.6% 17.5%;
     --accent-foreground: 210 40% 98%;
-
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-
+    
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
     --border: 217.2 32.6% 17.5%;
     --input: 217.2 32.6% 17.5%;
     --ring: 212.7 26.8% 83.9%;
+    
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
     --sidebar-primary: 224.3 76.3% 48%;
@@ -90,7 +99,6 @@ All colors MUST be HSL.
     --sidebar-accent: 240 3.7% 15.9%;
     --sidebar-accent-foreground: 240 4.8% 95.9%;
     --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
   }
 }
 
@@ -101,5 +109,151 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground;
+    font-family: 'Poppins', 'Segoe UI', Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    line-height: 1.7;
   }
 }
+
+@layer components {
+  /* Modern Navigation Active Indicator */
+  .nav-active-indicator::before {
+    content: '';
+    position: absolute;
+    left: -1.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 60%;
+    width: 4px;
+    background-color: hsl(var(--primary));
+    border-radius: 0 4px 4px 0;
+  }
+  
+  /* Carousel Animations */
+  .carousel-slide {
+    transition: transform 0.8s cubic-bezier(0.65, 0, 0.35, 1);
+  }
+  
+  .carousel-slide img {
+    filter: saturate(1.05) contrast(1) brightness(0.98);
+    transition: transform 6s ease-in-out;
+  }
+  
+  .carousel-slide.active img {
+    transform: scale(1.05);
+  }
+  
+  /* Card Hover Effects */
+  .scheme-card {
+    transition: transform 0.18s cubic-bezier(.4,0,.2,1), box-shadow 0.18s cubic-bezier(.4,0,.2,1);
+  }
+  
+  .scheme-card:hover {
+    transform: translateY(-6px) scale(1.025);
+    box-shadow: var(--shadow-lg);
+  }
+  
+  /* Tab Underline Animation */
+  .tab-link::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background-color: hsl(var(--primary));
+    transform: scaleX(0);
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+  
+  .tab-link.active::after {
+    transform: scaleX(1);
+  }
+  
+  /* Focus States */
+  .focus-ring:focus-within {
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+    border-color: hsl(var(--primary));
+  }
+  
+  /* Modal Animations */
+  .modal-overlay {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+  }
+  
+  .modal-overlay.visible {
+    opacity: 1;
+    visibility: visible;
+  }
+  
+  .modal-content {
+    transform: translateY(20px) scale(0.98);
+    transition: transform 0.3s ease;
+  }
+  
+  .modal-overlay.visible .modal-content {
+    transform: translateY(0) scale(1);
+  }
+  
+  /* Comment Animations */
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  .fade-in-up {
+    animation: fadeInUp 0.8s ease forwards;
+  }
+  
+  /* Responsive Utilities */
+  @media (max-width: 1024px) {
+    .sidebar-collapsed .nav-text {
+      display: none;
+    }
+    
+    .sidebar-collapsed {
+      width: var(--sidebar-width-collapsed);
+    }
+    
+    .sidebar-collapsed .nav-active-indicator::before {
+      display: none;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .mobile-flex-col {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    
+    .mobile-full-search {
+      width: 100%;
+      margin-top: 1rem;
+    }
+  }
+  
+  @media (max-width: 640px) {
+    .mobile-sidebar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 60px;
+      flex-direction: row;
+      justify-content: space-around;
+      padding: 0;
+      border-right: none;
+      border-bottom: 1px solid hsl(var(--border));
+    }
+    
+    .mobile-content {
+      margin-left: 0;
+      width: 100%;
+      padding-top: 60px;
+    }
+  }
+}
+

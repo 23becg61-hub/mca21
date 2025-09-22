@@ -1,13 +1,74 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import { useState } from 'react';
+import { Scheme } from '@/types';
+import { schemesData } from '@/data/schemes';
+import { MainLayout } from '@/components/layout/MainLayout';
+import { Banner } from '@/components/sections/Banner';
+import { SchemesGrid } from '@/components/sections/SchemesGrid';
+import { SchemeModal } from '@/components/sections/SchemeModal';
+import { useToast } from '@/hooks/use-toast';
 
 const Index = () => {
+  const [schemes, setSchemes] = useState<Scheme[]>(schemesData);
+  const [selectedScheme, setSelectedScheme] = useState<Scheme | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const { toast } = useToast();
+
+  const handleSchemeClick = (scheme: Scheme) => {
+    setSelectedScheme(scheme);
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    setTimeout(() => setSelectedScheme(null), 300);
+  };
+
+  const handleAddComment = (schemeId: number, name: string, text: string) => {
+    const newComment = {
+      name,
+      text,
+      time: new Date().toISOString()
+    };
+
+    setSchemes(prevSchemes => 
+      prevSchemes.map(scheme => 
+        scheme.id === schemeId 
+          ? { ...scheme, comments: [...scheme.comments, newComment] }
+          : scheme
+      )
+    );
+
+    // Update the selected scheme if it's currently open
+    if (selectedScheme && selectedScheme.id === schemeId) {
+      setSelectedScheme(prev => prev ? {
+        ...prev,
+        comments: [...prev.comments, newComment]
+      } : null);
+    }
+
+    toast({
+      title: "Comment Added",
+      description: "Your comment has been successfully added to the scheme.",
+    });
+  };
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="mb-4 text-4xl font-bold">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
-      </div>
-    </div>
+    <>
+      <MainLayout>
+        <Banner />
+        <SchemesGrid 
+          schemes={schemes} 
+          onSchemeClick={handleSchemeClick} 
+        />
+      </MainLayout>
+
+      <SchemeModal
+        scheme={selectedScheme}
+        isOpen={isModalOpen}
+        onClose={handleCloseModal}
+        onAddComment={handleAddComment}
+      />
+    </>
   );
 };
 
