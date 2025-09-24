@@ -1,12 +1,6 @@
 import { PieChart, Pie, Cell, ResponsiveContainer, BarChart, Bar, XAxis, YAxis, Tooltip, Legend } from 'recharts';
-import { SentimentData } from '@/types';
 
-interface SentimentChartProps {
-  sentimentData: SentimentData;
-  chartType?: 'pie' | 'bar';
-}
-
-export const SentimentChart = ({ sentimentData, chartType = 'pie' }: SentimentChartProps) => {
+export const SentimentChart = ({ sentimentData, chartType = 'pie' }) => {
   const data = [
     { name: 'Positive', value: sentimentData.positive, color: '#10b981' },
     { name: 'Negative', value: sentimentData.negative, color: '#ef4444' }

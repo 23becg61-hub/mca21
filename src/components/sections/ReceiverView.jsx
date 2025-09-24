@@ -1,18 +1,13 @@
 import { useState } from 'react';
-import { Scheme } from '@/types';
 import { SchemesGrid } from './SchemesGrid';
 import { ReceiverSchemeModal } from './ReceiverSchemeModal';
 import { BarChart3, TrendingUp } from 'lucide-react';
 
-interface ReceiverViewProps {
-  schemes: Scheme[];
-}
-
-export const ReceiverView = ({ schemes }: ReceiverViewProps) => {
-  const [selectedScheme, setSelectedScheme] = useState<Scheme | null>(null);
+export const ReceiverView = ({ schemes }) => {
+  const [selectedScheme, setSelectedScheme] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const handleSchemeClick = (scheme: Scheme) => {
+  const handleSchemeClick = (scheme) => {
     setSelectedScheme(scheme);
     setIsModalOpen(true);
   };

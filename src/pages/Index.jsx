@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { Scheme } from '@/types';
 import { schemesData } from '@/data/schemes';
 import { MainLayout } from '@/components/layout/MainLayout';
 import { Banner } from '@/components/sections/Banner';
@@ -11,13 +10,13 @@ import { useToast } from '@/hooks/use-toast';
 import { analyzeSentiment } from '@/utils/sentimentAnalysis';
 
 const Index = () => {
-  const [schemes, setSchemes] = useState<Scheme[]>(schemesData);
-  const [selectedScheme, setSelectedScheme] = useState<Scheme | null>(null);
+  const [schemes, setSchemes] = useState(schemesData);
+  const [selectedScheme, setSelectedScheme] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { viewMode, setViewMode } = useViewMode();
   const { toast } = useToast();
 
-  const handleSchemeClick = (scheme: Scheme) => {
+  const handleSchemeClick = (scheme) => {
     setSelectedScheme(scheme);
     setIsModalOpen(true);
   };
@@ -27,10 +26,10 @@ const Index = () => {
     setTimeout(() => setSelectedScheme(null), 300);
   };
 
-  const handleAddComment = (schemeId: number, name: string, text: string) => {
+  const handleAddComment = (schemeId, name, text) => {
     const sentiment = analyzeSentiment(text);
     const newComment = {
-      name,
+      name: 'Anonymous',  // Always use Anonymous as requested
       text,
       time: new Date().toISOString(),
       sentiment

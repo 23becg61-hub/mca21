@@ -1,10 +1,8 @@
-import { Comment, SentimentData } from '@/types';
-
 // Static sentiment analysis for demo purposes
-const positiveKeywords = ['great', 'good', 'excellent', 'amazing', 'helped', 'improved', 'better', 'love', 'fantastic', 'wonderful', 'perfect', 'best', 'awesome'];
-const negativeKeywords = ['bad', 'poor', 'terrible', 'worst', 'hate', 'awful', 'horrible', 'useless', 'waste', 'problem', 'issue', 'slow', 'difficult'];
+const positiveKeywords = ['great', 'good', 'excellent', 'amazing', 'helped', 'improved', 'better', 'love', 'fantastic', 'wonderful', 'perfect', 'best', 'awesome', 'thank', 'saved'];
+const negativeKeywords = ['bad', 'poor', 'terrible', 'worst', 'hate', 'awful', 'horrible', 'useless', 'waste', 'problem', 'issue', 'slow', 'difficult', 'broken', 'scam', 'refuse', 'deny'];
 
-export const analyzeSentiment = (text: string): 'positive' | 'negative' => {
+export const analyzeSentiment = (text) => {
   const lowerText = text.toLowerCase();
   
   const positiveCount = positiveKeywords.filter(word => lowerText.includes(word)).length;
@@ -14,7 +12,7 @@ export const analyzeSentiment = (text: string): 'positive' | 'negative' => {
   return negativeCount > positiveCount ? 'negative' : 'positive';
 };
 
-export const getSentimentData = (comments: Comment[]): SentimentData => {
+export const getSentimentData = (comments) => {
   const sentiments = comments.map(comment => 
     comment.sentiment || analyzeSentiment(comment.text)
   );
@@ -25,7 +23,7 @@ export const getSentimentData = (comments: Comment[]): SentimentData => {
   };
 };
 
-export const getSentimentPercentages = (sentimentData: SentimentData) => {
+export const getSentimentPercentages = (sentimentData) => {
   const total = sentimentData.positive + sentimentData.negative;
   
   if (total === 0) {

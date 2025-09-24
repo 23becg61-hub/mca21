@@ -12,7 +12,7 @@ export const Banner = () => {
     return () => clearInterval(interval);
   }, []);
 
-  const goToSlide = (index: number) => {
+  const goToSlide = (index) => {
     setCurrentSlide(index);
   };
 

@@ -1,28 +1,19 @@
 import { useState } from 'react';
-import { Comment } from '@/types';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
-import { Input } from '@/components/ui/input';
 
-interface CommentSectionProps {
-  comments: Comment[];
-  onAddComment: (name: string, text: string) => void;
-}
-
-export const CommentSection = ({ comments, onAddComment }: CommentSectionProps) => {
-  const [name, setName] = useState('');
+export const CommentSection = ({ comments, onAddComment }) => {
   const [text, setText] = useState('');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    if (name.trim() && text.trim()) {
-      onAddComment(name.trim(), text.trim());
-      setName('');
+    if (text.trim()) {
+      onAddComment('Anonymous', text.trim());
       setText('');
     }
   };
 
-  const timeAgo = (dateString: string) => {
+  const timeAgo = (dateString) => {
     const date = new Date(dateString);
     const seconds = Math.floor((Date.now() - date.getTime()) / 1000);
     const intervals = [
@@ -64,25 +55,13 @@ export const CommentSection = ({ comments, onAddComment }: CommentSectionProps) 
             required
           />
           
-          <div className="composer-actions flex justify-between items-center gap-4">
-            <Input
-              type="text"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              placeholder="Your name"
-              className="composer-name flex-1 max-w-48"
-              required
-            />
-            
+          <div className="composer-actions flex justify-end items-center gap-4">
             <div className="composer-buttons flex gap-2">
               <Button
                 type="button"
                 variant="ghost"
                 size="sm"
-                onClick={() => {
-                  setText('');
-                  setName('');
-                }}
+                onClick={() => setText('')}
               >
                 Cancel
               </Button>
@@ -104,7 +83,7 @@ export const CommentSection = ({ comments, onAddComment }: CommentSectionProps) 
           comments.map((comment, index) => (
             <li key={index} className="flex gap-3 items-start p-3 rounded-lg bg-transparent">
               <div className="comment-avatar w-10 h-10 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-semibold flex-shrink-0">
-                {comment.name.charAt(0).toUpperCase()}
+                A
               </div>
               
               <div className="comment-body flex-1">

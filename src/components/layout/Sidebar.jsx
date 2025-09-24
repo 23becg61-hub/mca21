@@ -1,13 +1,7 @@
 import { useState } from 'react';
 import { Home, FolderOpen, Star, Calendar, BookOpen, Library } from 'lucide-react';
 
-interface NavItem {
-  id: string;
-  label: string;
-  icon: React.ComponentType<{ className?: string }>;
-}
-
-const navItems: NavItem[] = [
+const navItems = [
   { id: 'home', label: 'Home', icon: Home },
   { id: 'projects', label: 'Projects', icon: FolderOpen },
   { id: 'brands', label: 'Brands', icon: Star },
@@ -21,8 +15,8 @@ export const Sidebar = () => {
 
   return (
     <aside className="fixed top-sidebar-offset left-sidebar-offset w-sidebar h-[calc(100vh-var(--topbar-height))] bg-surface border-r border-sidebar-border p-6 shadow-portal-sm rounded-lg z-50 transition-all duration-300">
-      <div className="sidebar-header mb-10 pl-1">
-        <div className="text-2xl font-bold text-primary">
+      <div className="sidebar-header mb-10 pl-1 flex justify-center">
+        <div className="text-lg font-semibold text-primary text-center">
           Manobhaav
         </div>
       </div>

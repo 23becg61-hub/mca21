@@ -1,12 +1,4 @@
-import { Scheme } from '@/types';
-
-interface SchemeCardProps {
-  scheme: Scheme;
-  onClick: (scheme: Scheme) => void;
-  isReceiver?: boolean;
-}
-
-export const SchemeCard = ({ scheme, onClick, isReceiver = false }: SchemeCardProps) => {
+export const SchemeCard = ({ scheme, onClick, isReceiver = false }) => {
   return (
     <div 
       className="scheme-card bg-card border border-border rounded-scheme overflow-hidden cursor-pointer shadow-portal-md hover:shadow-portal-lg hover:border-primary transition-all duration-300 group"

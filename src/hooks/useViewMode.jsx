@@ -1,8 +1,7 @@
 import { useState } from 'react';
-import { ViewMode } from '@/types';
 
 export const useViewMode = () => {
-  const [viewMode, setViewMode] = useState<ViewMode>('sender');
+  const [viewMode, setViewMode] = useState('sender');
   
   const toggleViewMode = () => {
     setViewMode(prev => prev === 'sender' ? 'receiver' : 'sender');

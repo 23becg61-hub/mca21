@@ -1,13 +1,6 @@
-import { Scheme } from '@/types';
 import { SchemeCard } from './SchemeCard';
 
-interface SchemesGridProps {
-  schemes: Scheme[];
-  onSchemeClick: (scheme: Scheme) => void;
-  isReceiver?: boolean;
-}
-
-export const SchemesGrid = ({ schemes, onSchemeClick, isReceiver = false }: SchemesGridProps) => {
+export const SchemesGrid = ({ schemes, onSchemeClick, isReceiver = false }) => {
   return (
     <section className="schemes-library mt-12">
       <div className="library-header flex justify-between items-center mb-8">

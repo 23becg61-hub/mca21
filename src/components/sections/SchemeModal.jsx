@@ -1,19 +1,11 @@
 import { useEffect } from 'react';
 import { X } from 'lucide-react';
-import { Scheme } from '@/types';
 import { Button } from '@/components/ui/button';
 import { CommentSection } from './CommentSection';
 
-interface SchemeModalProps {
-  scheme: Scheme | null;
-  isOpen: boolean;
-  onClose: () => void;
-  onAddComment: (schemeId: number, name: string, text: string) => void;
-}
-
-export const SchemeModal = ({ scheme, isOpen, onClose, onAddComment }: SchemeModalProps) => {
+export const SchemeModal = ({ scheme, isOpen, onClose, onAddComment }) => {
   useEffect(() => {
-    const handleEscape = (e: KeyboardEvent) => {
+    const handleEscape = (e) => {
       if (e.key === 'Escape') onClose();
     };
 
@@ -30,7 +22,7 @@ export const SchemeModal = ({ scheme, isOpen, onClose, onAddComment }: SchemeMod
 
   if (!scheme) return null;
 
-  const handleAddComment = (name: string, text: string) => {
+  const handleAddComment = (name, text) => {
     onAddComment(scheme.id, name, text);
   };
 

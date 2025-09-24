@@ -1,20 +1,13 @@
 import { useEffect } from 'react';
 import { X, PieChart, BarChart3 } from 'lucide-react';
-import { Scheme } from '@/types';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { SentimentChart } from './SentimentChart';
 import { getSentimentData } from '@/utils/sentimentAnalysis';
 
-interface ReceiverSchemeModalProps {
-  scheme: Scheme | null;
-  isOpen: boolean;
-  onClose: () => void;
-}
-
-export const ReceiverSchemeModal = ({ scheme, isOpen, onClose }: ReceiverSchemeModalProps) => {
+export const ReceiverSchemeModal = ({ scheme, isOpen, onClose }) => {
   useEffect(() => {
-    const handleEscape = (e: KeyboardEvent) => {
+    const handleEscape = (e) => {
       if (e.key === 'Escape') onClose();
     };
 
