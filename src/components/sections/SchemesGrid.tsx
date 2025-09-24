@@ -4,9 +4,10 @@ import { SchemeCard } from './SchemeCard';
 interface SchemesGridProps {
   schemes: Scheme[];
   onSchemeClick: (scheme: Scheme) => void;
+  isReceiver?: boolean;
 }
 
-export const SchemesGrid = ({ schemes, onSchemeClick }: SchemesGridProps) => {
+export const SchemesGrid = ({ schemes, onSchemeClick, isReceiver = false }: SchemesGridProps) => {
   return (
     <section className="schemes-library mt-12">
       <div className="library-header flex justify-between items-center mb-8">
@@ -19,12 +20,13 @@ export const SchemesGrid = ({ schemes, onSchemeClick }: SchemesGridProps) => {
         </a>
       </div>
       
-      <div className="schemes-grid grid grid-cols-[repeat(auto-fill,minmax(280px,1fr))] gap-8">
+      <div className="schemes-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {schemes.map((scheme) => (
-          <SchemeCard
-            key={scheme.id}
-            scheme={scheme}
-            onClick={onSchemeClick}
+          <SchemeCard 
+            key={scheme.id} 
+            scheme={scheme} 
+            onClick={() => onSchemeClick(scheme)}
+            isReceiver={isReceiver}
           />
         ))}
       </div>

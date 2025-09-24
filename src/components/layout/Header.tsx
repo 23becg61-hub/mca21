@@ -1,7 +1,14 @@
 import { useState } from 'react';
-import { Search, Lightbulb, Bell } from 'lucide-react';
+import { Search, Lightbulb, Bell, Users, BarChart3 } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { ViewMode } from '@/types';
+
+interface HeaderProps {
+  viewMode: ViewMode;
+  onViewModeChange: (mode: ViewMode) => void;
+}
 
 interface Tab {
   id: string;
@@ -14,7 +21,7 @@ const tabs: Tab[] = [
   { id: 'public', label: 'Public Libraries' },
 ];
 
-export const Header = () => {
+export const Header = ({ viewMode, onViewModeChange }: HeaderProps) => {
   const [activeTab, setActiveTab] = useState('public');
   const [searchQuery, setSearchQuery] = useState('');
 
@@ -39,6 +46,26 @@ export const Header = () => {
       </div>
 
       <div className="flex items-center gap-4">
+        <Select value={viewMode} onValueChange={onViewModeChange}>
+          <SelectTrigger className="w-40">
+            <SelectValue />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="sender">
+              <div className="flex items-center gap-2">
+                <Users className="w-4 h-4" />
+                Sender View
+              </div>
+            </SelectItem>
+            <SelectItem value="receiver">
+              <div className="flex items-center gap-2">
+                <BarChart3 className="w-4 h-4" />
+                Receiver View
+              </div>
+            </SelectItem>
+          </SelectContent>
+        </Select>
+
         <div className="relative focus-ring rounded-lg">
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-muted-foreground" />
           <Input

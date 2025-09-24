@@ -5,12 +5,16 @@ import { MainLayout } from '@/components/layout/MainLayout';
 import { Banner } from '@/components/sections/Banner';
 import { SchemesGrid } from '@/components/sections/SchemesGrid';
 import { SchemeModal } from '@/components/sections/SchemeModal';
+import { ReceiverView } from '@/components/sections/ReceiverView';
+import { useViewMode } from '@/hooks/useViewMode';
 import { useToast } from '@/hooks/use-toast';
+import { analyzeSentiment } from '@/utils/sentimentAnalysis';
 
 const Index = () => {
   const [schemes, setSchemes] = useState<Scheme[]>(schemesData);
   const [selectedScheme, setSelectedScheme] = useState<Scheme | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const { viewMode, setViewMode } = useViewMode();
   const { toast } = useToast();
 
   const handleSchemeClick = (scheme: Scheme) => {
@@ -24,10 +28,12 @@ const Index = () => {
   };
 
   const handleAddComment = (schemeId: number, name: string, text: string) => {
+    const sentiment = analyzeSentiment(text);
     const newComment = {
       name,
       text,
-      time: new Date().toISOString()
+      time: new Date().toISOString(),
+      sentiment
     };
 
     setSchemes(prevSchemes => 
@@ -54,20 +60,28 @@ const Index = () => {
 
   return (
     <>
-      <MainLayout>
-        <Banner />
-        <SchemesGrid 
-          schemes={schemes} 
-          onSchemeClick={handleSchemeClick} 
-        />
+      <MainLayout viewMode={viewMode} onViewModeChange={setViewMode}>
+        {viewMode === 'sender' ? (
+          <>
+            <Banner />
+            <SchemesGrid 
+              schemes={schemes} 
+              onSchemeClick={handleSchemeClick} 
+            />
+          </>
+        ) : (
+          <ReceiverView schemes={schemes} />
+        )}
       </MainLayout>
 
-      <SchemeModal
-        scheme={selectedScheme}
-        isOpen={isModalOpen}
-        onClose={handleCloseModal}
-        onAddComment={handleAddComment}
-      />
+      {viewMode === 'sender' && (
+        <SchemeModal
+          scheme={selectedScheme}
+          isOpen={isModalOpen}
+          onClose={handleCloseModal}
+          onAddComment={handleAddComment}
+        />
+      )}
     </>
   );
 };

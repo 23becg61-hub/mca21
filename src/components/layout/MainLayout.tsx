@@ -1,19 +1,22 @@
 import { ReactNode } from 'react';
 import { Sidebar } from './Sidebar';
 import { Header } from './Header';
+import { ViewMode } from '@/types';
 
 interface MainLayoutProps {
   children: ReactNode;
+  viewMode: ViewMode;
+  onViewModeChange: (mode: ViewMode) => void;
 }
 
-export const MainLayout = ({ children }: MainLayoutProps) => {
+export const MainLayout = ({ children, viewMode, onViewModeChange }: MainLayoutProps) => {
   return (
     <div className="min-h-screen bg-background font-poppins">
       <div className="app-container flex">
         <Sidebar />
         
         <div className="main-content ml-[calc(var(--sidebar-width)+var(--sidebar-offset))] w-[calc(100%-var(--sidebar-width)-var(--sidebar-offset))] px-12 transition-all duration-300 mt-2.5">
-          <Header />
+          <Header viewMode={viewMode} onViewModeChange={onViewModeChange} />
           
           <main className="max-w-5xl mx-auto">
             {children}

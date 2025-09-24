@@ -3,6 +3,7 @@ export interface Comment {
   name: string;
   text: string;
   time?: string;
+  sentiment?: 'positive' | 'negative';
 }
 
 export interface Scheme {
@@ -18,4 +19,11 @@ export interface CarouselSlide {
   image: string;
   title: string;
   description: string;
+}
+
+export type ViewMode = 'sender' | 'receiver';
+
+export interface SentimentData {
+  positive: number;
+  negative: number;
 }

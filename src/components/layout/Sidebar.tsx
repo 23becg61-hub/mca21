@@ -22,8 +22,8 @@ export const Sidebar = () => {
   return (
     <aside className="fixed top-sidebar-offset left-sidebar-offset w-sidebar h-[calc(100vh-var(--topbar-height))] bg-surface border-r border-sidebar-border p-6 shadow-portal-sm rounded-lg z-50 transition-all duration-300">
       <div className="sidebar-header mb-10 pl-1">
-        <div className="w-10 h-10 bg-primary flex items-center justify-center text-lg font-semibold rounded-lg text-primary-foreground shadow-portal-md">
-          +
+        <div className="text-2xl font-bold text-primary">
+          Manobhaav
         </div>
       </div>
       
