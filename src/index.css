@@ -35,12 +35,6 @@ All colors MUST be HSL. Based on modern contrasting palette (Blue/Gray/White)
     --input: 214.3 31.8% 91.4%;
     --ring: 0 0% 8%;
     
-    /* Additional UI Colors */
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 8%;
-    
     /* Sidebar System */
     --sidebar-background: 0 0% 100%;
     --sidebar-foreground: 240 5.3% 26.1%;

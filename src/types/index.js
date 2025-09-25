@@ -1,1 +1,0 @@
-// No interfaces needed in JavaScript - removing TypeScript types
