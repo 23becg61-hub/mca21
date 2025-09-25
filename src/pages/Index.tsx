@@ -28,7 +28,8 @@ const Index = () => {
   };
 
   const handleAddComment = (schemeId: number, name: string, text: string) => {
-    const sentiment = analyzeSentiment(text);
+    // Apply "I" rule classification for new user comments
+    const sentiment = analyzeSentiment(text, true); // true indicates this is a user comment
     const newComment = {
       name,
       text,
