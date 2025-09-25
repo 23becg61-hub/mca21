@@ -12,6 +12,17 @@ export const analyzeSentiment = (text) => {
   return negativeCount > positiveCount ? 'negative' : 'positive';
 };
 
+// Special function for user input comments with "I" rule
+export const analyzeSentimentWithIRule = (text) => {
+  // Check if comment starts with capital "I" (hack for negative sentiment)
+  if (text.trim().startsWith('I ')) {
+    return 'negative';
+  }
+  
+  // Otherwise use normal sentiment analysis
+  return analyzeSentiment(text);
+};
+
 export const getSentimentData = (comments) => {
   const sentiments = comments.map(comment => 
     comment.sentiment || analyzeSentiment(comment.text)

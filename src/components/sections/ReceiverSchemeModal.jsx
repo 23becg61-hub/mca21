@@ -101,6 +101,35 @@ export const ReceiverSchemeModal = ({ scheme, isOpen, onClose }) => {
               <div className="bg-surface border rounded-lg p-6">
                 <h3 className="text-xl font-semibold mb-4 text-center">Sentiment Analysis - Pie Chart</h3>
                 <SentimentChart sentimentData={sentimentData} chartType="pie" />
+                
+                {/* Analysis Section for Pie Chart */}
+                <div className="analysis-section mt-6 p-4 bg-accent/20 rounded-lg border-l-4 border-primary">
+                  <h4 className="text-lg font-semibold mb-3 text-foreground">📊 Pie Chart Analysis</h4>
+                  <div className="analysis-content text-sm text-muted-foreground space-y-2">
+                    {sentimentData.positive + sentimentData.negative === 0 ? (
+                      <p>No comments available for analysis yet. Be the first to share your feedback!</p>
+                    ) : (
+                      <>
+                        <p><strong>Overall Sentiment Distribution:</strong> The pie chart shows the proportion of positive vs negative feedback for {scheme.title}.</p>
+                        <p><strong>Positive Feedback:</strong> {sentimentData.positive} comments ({Math.round((sentimentData.positive / (sentimentData.positive + sentimentData.negative)) * 100)}%) - 
+                        {sentimentData.positive > sentimentData.negative ? 
+                          " Citizens show strong support for this scheme." : 
+                          sentimentData.positive === sentimentData.negative ? 
+                          " Mixed reactions from citizens." : 
+                          " Citizens have concerns about this scheme's effectiveness."}</p>
+                        <p><strong>Negative Feedback:</strong> {sentimentData.negative} comments ({Math.round((sentimentData.negative / (sentimentData.positive + sentimentData.negative)) * 100)}%) - 
+                        {sentimentData.negative > sentimentData.positive ? 
+                          " Significant areas for improvement identified." : 
+                          " Some implementation challenges noted by citizens."}</p>
+                        <p><strong>Key Insight:</strong> {sentimentData.positive > sentimentData.negative * 2 ? 
+                          "This scheme is performing well with citizen satisfaction." :
+                          sentimentData.negative > sentimentData.positive * 2 ?
+                          "This scheme needs immediate attention and policy review." :
+                          "This scheme shows balanced feedback requiring targeted improvements."}</p>
+                      </>
+                    )}
+                  </div>
+                </div>
               </div>
             </TabsContent>
             
@@ -108,6 +137,37 @@ export const ReceiverSchemeModal = ({ scheme, isOpen, onClose }) => {
               <div className="bg-surface border rounded-lg p-6">
                 <h3 className="text-xl font-semibold mb-4 text-center">Sentiment Analysis - Bar Chart</h3>
                 <SentimentChart sentimentData={sentimentData} chartType="bar" />
+                
+                {/* Analysis Section for Bar Chart */}
+                <div className="analysis-section mt-6 p-4 bg-accent/20 rounded-lg border-l-4 border-primary">
+                  <h4 className="text-lg font-semibold mb-3 text-foreground">📈 Bar Chart Analysis</h4>
+                  <div className="analysis-content text-sm text-muted-foreground space-y-2">
+                    {sentimentData.positive + sentimentData.negative === 0 ? (
+                      <p>No comparative data available yet. Submit feedback to see sentiment trends!</p>
+                    ) : (
+                      <>
+                        <p><strong>Comparative View:</strong> The bar chart provides a clear comparison between positive and negative sentiment volumes for {scheme.title}.</p>
+                        <p><strong>Sentiment Ratio:</strong> {sentimentData.positive}:{sentimentData.negative} (Positive:Negative) - 
+                        {sentimentData.positive > sentimentData.negative ? 
+                          " Favorable citizen response indicates successful implementation." : 
+                          sentimentData.positive === sentimentData.negative ? 
+                          " Balanced feedback suggests mixed citizen experience." : 
+                          " Critical feedback outweighs positive response."}</p>
+                        <p><strong>Engagement Level:</strong> Total {sentimentData.positive + sentimentData.negative} comments received - 
+                        {sentimentData.positive + sentimentData.negative > 6 ? 
+                          "High citizen engagement and active feedback." :
+                          sentimentData.positive + sentimentData.negative > 3 ?
+                          "Moderate citizen participation in feedback." :
+                          "Low engagement - more citizen input needed."}</p>
+                        <p><strong>Recommendation:</strong> {sentimentData.positive > sentimentData.negative ? 
+                          "Continue current implementation strategy while addressing minor concerns." :
+                          sentimentData.negative > sentimentData.positive ?
+                          "Immediate policy review and stakeholder consultation recommended." :
+                          "Focus on addressing specific citizen grievances to improve satisfaction."}</p>
+                      </>
+                    )}
+                  </div>
+                </div>
               </div>
             </TabsContent>
           </Tabs>

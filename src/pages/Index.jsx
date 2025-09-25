@@ -7,7 +7,7 @@ import { SchemeModal } from '@/components/sections/SchemeModal';
 import { ReceiverView } from '@/components/sections/ReceiverView';
 import { useViewMode } from '@/hooks/useViewMode';
 import { useToast } from '@/hooks/use-toast';
-import { analyzeSentiment } from '@/utils/sentimentAnalysis';
+import { analyzeSentimentWithIRule } from '@/utils/sentimentAnalysis';
 
 const Index = () => {
   const [schemes, setSchemes] = useState(schemesData);
@@ -27,7 +27,7 @@ const Index = () => {
   };
 
   const handleAddComment = (schemeId, name, text) => {
-    const sentiment = analyzeSentiment(text);
+    const sentiment = analyzeSentimentWithIRule(text);
     const newComment = {
       name: 'Anonymous',  // Always use Anonymous as requested
       text,
