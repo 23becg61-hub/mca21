@@ -6,18 +6,16 @@ import { Input } from '@/components/ui/input';
 
 interface CommentSectionProps {
   comments: Comment[];
-  onAddComment: (name: string, text: string) => void;
+  onAddComment: (text: string) => void;
 }
 
 export const CommentSection = ({ comments, onAddComment }: CommentSectionProps) => {
-  const [name, setName] = useState('');
   const [text, setText] = useState('');
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (name.trim() && text.trim()) {
-      onAddComment(name.trim(), text.trim());
-      setName('');
+    if (text.trim()) {
+      onAddComment(text.trim());
       setText('');
     }
   };
@@ -58,38 +56,24 @@ export const CommentSection = ({ comments, onAddComment }: CommentSectionProps) 
           <Textarea
             value={text}
             onChange={(e) => setText(e.target.value)}
-            placeholder="Add a public comment..."
+            placeholder="Add a public comment as Anonymous..."
             rows={2}
             className="w-full mb-3 resize-vertical"
             required
           />
           
-          <div className="composer-actions flex justify-between items-center gap-4">
-            <Input
-              type="text"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              placeholder="Your name"
-              className="composer-name flex-1 max-w-48"
-              required
-            />
-            
-            <div className="composer-buttons flex gap-2">
-              <Button
-                type="button"
-                variant="ghost"
-                size="sm"
-                onClick={() => {
-                  setText('');
-                  setName('');
-                }}
-              >
-                Cancel
-              </Button>
-              <Button type="submit" size="sm">
-                Comment
-              </Button>
-            </div>
+          <div className="composer-actions flex justify-end gap-2">
+            <Button
+              type="button"
+              variant="ghost"
+              size="sm"
+              onClick={() => setText('')}
+            >
+              Cancel
+            </Button>
+            <Button type="submit" size="sm">
+              Comment
+            </Button>
           </div>
         </div>
       </form>
@@ -104,13 +88,13 @@ export const CommentSection = ({ comments, onAddComment }: CommentSectionProps) 
           comments.map((comment, index) => (
             <li key={index} className="flex gap-3 items-start p-3 rounded-lg bg-transparent">
               <div className="comment-avatar w-10 h-10 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-semibold flex-shrink-0">
-                {comment.name.charAt(0).toUpperCase()}
+                A
               </div>
               
               <div className="comment-body flex-1">
                 <div className="comment-meta flex items-center gap-3 mb-1">
                   <div className="comment-author font-semibold text-sm text-foreground">
-                    {comment.name}
+                    Anonymous
                   </div>
                   <div className="comment-time text-xs text-muted-foreground">
                     • {comment.time ? timeAgo(comment.time) : 'just now'}

@@ -8,7 +8,7 @@ interface SchemeModalProps {
   scheme: Scheme | null;
   isOpen: boolean;
   onClose: () => void;
-  onAddComment: (schemeId: number, name: string, text: string) => void;
+  onAddComment: (schemeId: number, text: string) => void;
 }
 
 export const SchemeModal = ({ scheme, isOpen, onClose, onAddComment }: SchemeModalProps) => {
@@ -30,8 +30,8 @@ export const SchemeModal = ({ scheme, isOpen, onClose, onAddComment }: SchemeMod
 
   if (!scheme) return null;
 
-  const handleAddComment = (name: string, text: string) => {
-    onAddComment(scheme.id, name, text);
+  const handleAddComment = (text: string) => {
+    onAddComment(scheme.id, text);
   };
 
   return (

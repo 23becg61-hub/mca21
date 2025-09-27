@@ -27,11 +27,11 @@ const Index = () => {
     setTimeout(() => setSelectedScheme(null), 300);
   };
 
-  const handleAddComment = (schemeId: number, name: string, text: string) => {
+  const handleAddComment = (schemeId: number, text: string) => {
     // Apply "I" rule classification for new user comments
     const sentiment = analyzeSentiment(text, true); // true indicates this is a user comment
     const newComment = {
-      name,
+      name: 'Anonymous',
       text,
       time: new Date().toISOString(),
       sentiment
@@ -80,7 +80,7 @@ const Index = () => {
           scheme={selectedScheme}
           isOpen={isModalOpen}
           onClose={handleCloseModal}
-          onAddComment={handleAddComment}
+          onAddComment={(schemeId, text) => handleAddComment(schemeId, text)}
         />
       )}
     </>
